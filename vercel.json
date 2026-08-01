@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/", "destination": "/Frontend/Intro.html" },
+    { "source": "/assets/(.*)", "destination": "/Frontend/assets/$1" },
+    { "source": "/PICS/(.*)", "destination": "/PICS/$1" },
+    { "source": "/Products-Pics/(.*)", "destination": "/Products-Pics/$1" },
+    { "source": "/(.*)", "destination": "/Frontend/$1" }
+  ]
+}
