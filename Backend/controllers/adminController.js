@@ -132,7 +132,7 @@ exports.createProduct = async (req, res) => {
     try {
         const productData = { ...req.body };
         if (req.file) {
-            productData.image = 'http://localhost:5000/uploads/' + req.file.filename;
+            productData.image = 'https://shafeeq-pansaar-store-production.up.railway.app/uploads/' + req.file.filename;
         }
         if (productData.price) productData.price = Number(productData.price);
         if (productData.profit) productData.profit = Number(productData.profit);
@@ -149,7 +149,7 @@ exports.updateProduct = async (req, res) => {
     try {
         const updateData = { ...req.body };
         if (req.file) {
-            updateData.image = 'http://localhost:5000/uploads/' + req.file.filename;
+            updateData.image = 'https://shafeeq-pansaar-store-production.up.railway.app/uploads/' + req.file.filename;
         }
         if (updateData.price) updateData.price = Number(updateData.price);
         if (updateData.profit) updateData.profit = Number(updateData.profit);
