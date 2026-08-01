@@ -20,7 +20,6 @@ router.post('/setup', adminController.setup);
 router.get('/fix-products', async (req, res) => {
     try {
         const Product = require('../models/Product');
-        const delRes = await Product.deleteMany({ category: 'General' });
         const oldProducts = await Product.find({ image: { $regex: 'localhost:5000' } });
         let updatedCount = 0;
         for (const p of oldProducts) {
@@ -28,7 +27,7 @@ router.get('/fix-products', async (req, res) => {
             await p.save();
             updatedCount++;
         }
-        res.json({ deleted: delRes.deletedCount, fixed: updatedCount });
+        res.json({ fixed: updatedCount });
     } catch(e) {
         res.status(500).json({ error: e.message });
     }
