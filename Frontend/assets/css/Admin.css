@@ -1,0 +1,38 @@
+@import "Login.css";
+
+:root {
+    --secondary-color: #f59e0b;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* space for icon */
+}
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+/* Extend Login.css for Admin Portal */
+.auth-header h2 {
+    color: var(--secondary-color);
+}
+.auth-btn {
+    background: linear-gradient(135deg, var(--secondary-color), #d97706);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
+    color: white;
+}
+.auth-btn:hover {
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.modal-header h3 {
+    color: var(--secondary-color);
+}

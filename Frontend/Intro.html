@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shafeeq Pansaar Store - Premium Quality Essentials</title>
+    <meta name="description"
+        content="Shafeeq Pansaar Store is your trusted neighborhood e-commerce destination for pure, high-quality household essentials and authentic herbal goods.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/Intro.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <nav class="nav-links">
+                <button class="social-link" id="themeToggle" style="background:none; border:none; cursor:pointer;" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="https://www.facebook.com/share/1SfvPaYyzK/" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://www.instagram.com/itx._.me._.hannan?igsh=MWIxMjB4eWk2M3NwMA==" target="_blank" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://wa.me/923324071639" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+                <button class="btn order-btn" style="background:var(--secondary-color); margin-right:10px;" onclick="window.location.href='Admin.html'">Admin</button>
+                <button class="btn order-btn" onclick="window.location.href='Login.html'">Order Now</button>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1 style="cursor: pointer;" onclick="window.location.href='Login.html'">Shafeeq Pansaar Store</h1>
+        <p>Welcome to Shafeeq Pansaar Store</p>
+        
+        <div style="display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+            <div style="background: var(--surface-color); padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; min-width: 100px; text-align: center;">
+                <h3 style="margin-bottom: 10px; color: var(--primary-color); font-size: 1.1rem; justify-content: center;">Total Users</h3>
+                <h2 id="statsUsers" style="font-size: 2rem; margin: 0;">--</h2>
+            </div>
+            <div style="background: var(--surface-color); padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; min-width: 100px; text-align: center;">
+                <h3 style="margin-bottom: 10px; color: var(--secondary-color); font-size: 1.1rem; justify-content: center;">Avg Rating</h3>
+                <h2 id="statsRating" style="font-size: 2rem; margin: 0;">-- <i class="fas fa-star" style="font-size: 1.2rem; color: #facc15;"></i></h2>
+            </div>
+            <div style="background: var(--surface-color); padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; min-width: 100px; text-align: center;">
+                <h3 style="margin-bottom: 10px; color: var(--accent-color); font-size: 1.1rem; justify-content: center;">Reviews</h3>
+                <h2 id="statsReviews" style="font-size: 2rem; margin: 0;">--</h2>
+            </div>
+        </div>
+
+        <div style="margin: 40px 0;">
+            <h2 style="text-align: center;">Recent Reviews</h2>
+            <div id="recentReviewsContainer" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <!-- Populated by JS -->
+                <p style="text-align: center; color: var(--text-muted);">Loading reviews...</p>
+            </div>
+        </div>
+
+        <h2>About Us</h2>
+        <p>Welcome to Shafeeq Pansaar Store, your most trusted neighborhood e-commerce destination for pure,
+            high-quality
+            household essentials and authentic herbal goods. We believe that every kitchen deserves the finest
+            ingredients
+            without compromising on affordability. From everyday staples and premium quality rice to 100% pure spices
+            and
+            organic honey, we carefully source and deliver the best products directly to your doorstep. Our mission is
+            to
+            combine the traditional trust of a local 'Pansaar' with the speed and convenience of modern online shopping.
+        </p>
+        <h2>Our Premium Products</h2>
+        <p>We offer a comprehensive range of daily use items, categorized for your convenience. All our prices are
+            highly
+            competitive, ensuring the best value for your family:</p>
+        <br>
+        <h3>Everyday Staples:</h3>
+        <ul>
+            <li>Gandum (Wheat): Rs 1,050–1,150 per 10 kg</li>
+            <li>Chawal Basmati (Super Kernel): Rs. 250–350 per kg</li>
+            <li>Daal Chana (Gram Lentil): Rs. 280–320 per kg</li>
+            <li>Daal Masoor (Red Lentil): Rs. 260–300 per kg</li>
+            <li>Cheeni (Sugar): Rs. 145 – 160 per kg</li>
+        </ul>
+        <h3>Cooking Essentials & Beverages:</h3>
+        <ul>
+            <li>Branded Cooking Oil (e.g., Dalda): Rs. 500–600 per liter</li>
+            <li>Premium Ghee: Rs. 480–580 per kg</li>
+            <li>Tea (e.g., Lipton): Rs. 1,200–1,400 per kg</li>
+        </ul>
+        <h3>Pure Spices & Herbs (Pansaar Specials):</h3>
+        <ul>
+            <li>Zera (Cumin): Rs. 700–900 per kg</li>
+            <li>Kaali Mirch (Black Pepper): Rs. 1,200–1,500 per kg</li>
+            <li>Ilaichi (Green Cardamom): Rs. 4,500–6,000 per kg</li>
+            <li>Haldi (Turmeric): Rs. 250–350 per kg</li>
+            <li>Sabut Dhania (Coriander Seeds): Rs. 250–300 per kg</li>
+            <li>Ajwain (Carom Seeds): Rs. 400–500 per kg</li>
+            <li>Sonf (Fennel Seeds): Rs. 300–400 per kg</li>
+            <li>Laung (Cloves): Rs. 2,000–2,500 per kg</li>
+            <li>Darchini (Cinnamon): Rs. 800–1,000 per kg</li>
+        </ul>
+        <h3>Health & Household:</h3>
+        <ul>
+            <li>Khalis Honey (Pure): Rs. 800–1,200 per kg</li>
+            <li>Surf (Detergent): Rs. 250–400 per kg</li>
+        </ul>
+        <h2>Our Platforms</h2>
+        <p>
+            Experience seamless shopping across all your devices. The Shafeeq Pansaar Store is accessible via our
+            lightning-fast web portal, designed to provide a smooth, user-friendly interface whether you are browsing
+            from
+            your laptop or your mobile phone. Simply add your favorite items to the cart, check out securely, and track
+            your
+            essential groceries in real-time.
+        </p>
+        <h2>Contact Us</h2>
+        <p>We are always here to assist you with your orders and inquiries.</p>
+        <ul>
+            <li>Phone / WhatsApp: +92 332 4071639</li>
+            <li>Email: hannanitx@gmail.com</li>
+            <li>Main Branch Location: Main Bazar Galla Mandi Sheikhupura, Pakistan</li>
+        </ul>
+
+        <div style="background: var(--surface-color); padding: 30px; border-radius: 12px; margin: 40px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h2 style="margin-top: 0;">Still have a question?</h2>
+            <p>If you have any quick questions, feel free to ask us right here!</p>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <input type="text" id="qName" placeholder="Your Name" style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <input type="email" id="qEmail" placeholder="Your Email" style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <textarea id="qText" rows="4" placeholder="Your Question..." style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);"></textarea>
+                <button class="btn order-btn" style="align-self: flex-start; padding: 12px 24px;" onclick="submitQuestion()">Submit Question</button>
+            </div>
+        </div>
+
+        <p>Thank you for choosing Shafeeq Pansaar Store—where quality meets affordability.</p>
+        <footer>
+            <p>Copyright © 2026 Shafeeq Pansaar Store. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="assets/js/Intro.js"></script>
+</body>
+
+</html>

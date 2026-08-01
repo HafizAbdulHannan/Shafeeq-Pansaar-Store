@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Shafeeq Pansaar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/AdminPanel.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <button class="nav-btn active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-line"></i> Dashboard</button>
+                <button class="nav-btn" onclick="switchTab('products', this)"><i class="fas fa-box"></i> Products</button>
+                <button class="nav-btn" onclick="switchTab('orders', this)"><i class="fas fa-shopping-cart"></i> Orders</button>
+                <button class="nav-btn" onclick="switchTab('feedback', this)"><i class="fas fa-comments"></i> Feedback</button>
+                <button class="nav-btn" onclick="switchTab('questions', this)"><i class="fas fa-question-circle"></i> Questions?</button>
+                <button class="nav-btn" onclick="switchTab('settings', this)"><i class="fas fa-cog"></i> Settings</button>
+                <div style="flex:1"></div>
+                <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="page-header">
+                    <h2>Dashboard Overview</h2>
+                    <div>
+                        <button class="btn btn-primary" style="background:#f59e0b; border:none; margin-right: 10px;" onclick="resetEarnings()"><i class="fas fa-undo"></i> Reset Earnings</button>
+                        <button class="btn btn-primary" style="background:#ef4444; border:none;" onclick="resetDashboard()"><i class="fas fa-trash"></i> Reset All Data</button>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Earnings</h4>
+                        <div class="value" id="statEarnings">Rs. 0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Profit</h4>
+                        <div class="value" id="statProfit">Rs. 0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Orders</h4>
+                        <div class="value" id="statTotalOrders">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Pending Orders</h4>
+                        <div class="value" id="statPendingOrders">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Tab -->
+            <section id="products" class="tab-content">
+                <div class="page-header">
+                    <h2>Manage Products</h2>
+                    <button class="btn btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> Add Product</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Profit</th>
+                                <th>Sold Out</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Tab -->
+            <section id="orders" class="tab-content">
+                <div class="page-header">
+                    <h2>Manage Orders</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Address</th>
+                                <th>Payment</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Feedback Tab -->
+            <section id="feedback" class="tab-content">
+                <div class="page-header">
+                    <h2>User Feedback</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Rating</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feedbackTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Questions Tab -->
+            <section id="questions" class="tab-content">
+                <div class="page-header">
+                    <h2>User Questions</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Question</th>
+                            </tr>
+                        </thead>
+                        <tbody id="questionsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="settings" class="tab-content">
+                <div class="page-header">
+                    <h2>Store Settings</h2>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Store Status</h4>
+                        <label class="switch">
+                            <input type="checkbox" id="storeOpenToggle" onchange="toggleStoreStatus(this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                        <p style="margin-top:10px; font-size:0.9rem;" id="storeStatusText">Store is Open</p>
+                        
+                        <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--border-color);">
+                        
+                        <h4>Auto Open/Close</h4>
+                        <label class="switch">
+                            <input type="checkbox" id="autoOpenToggle" onchange="updateAutoSchedule()">
+                            <span class="slider"></span>
+                        </label>
+                        <p style="margin-top:10px; font-size:0.85rem; color: var(--text-muted);">Syncs store status based on time</p>
+
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem;">Open Time</label>
+                                <input type="time" id="openTimeInput" class="form-group" style="margin: 0; padding: 0.5rem;" onchange="updateAutoSchedule()">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.85rem;">Close Time</label>
+                                <input type="time" id="closeTimeInput" class="form-group" style="margin: 0; padding: 0.5rem;" onchange="updateAutoSchedule()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>Change Your Credentials</h4>
+                        <div class="form-group">
+                            <input type="text" id="updateUsername" placeholder="New Username (optional)">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="updatePassword" placeholder="New Password (optional)">
+                        </div>
+                        <button class="btn btn-secondary" onclick="updateCredentials()">Update Credentials</button>
+                    </div>
+
+                    <div class="stat-card" id="adminCreateCard" style="display:none;">
+                        <h4>Create Sub-Admin</h4>
+                        <div class="form-group">
+                            <input type="text" id="newAdminUsername" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="newAdminPassword" placeholder="Password">
+                        </div>
+                        <button class="btn btn-secondary" onclick="createAdmin()">Create Admin</button>
+                    </div>
+                </div>
+
+                <div class="page-header" style="margin-top: 2rem;">
+                    <h2>Payment Methods</h2>
+                    <button class="btn btn-primary" onclick="openPaymentModal()"><i class="fas fa-plus"></i> Add Method</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method Name</th>
+                                <th>Details / Account</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal-overlay" id="orderDetailsModalOverlay">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Order Items</h3>
+                <button class="close-btn" onclick="closeOrderDetailsModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <ul id="orderDetailsList" style="list-style: none; padding: 0; margin-bottom: 1rem; color: var(--text-main);">
+                    <!-- Items populated by JS -->
+                </ul>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; color: var(--text-main);">
+                    <span>Total Amount:</span>
+                    <span style="color: var(--primary-color);">Rs. <span id="orderDetailsTotal">0</span></span>
+                </div>
+                <div id="orderTransactionIdContainer" style="display: none; background: #f3f4f6; padding: 10px; margin-top: 15px; border-radius: 8px;">
+                    <div style="margin-bottom: 5px;"><strong style="color: var(--text-main);">Customer Account Name:</strong> <span id="orderUserAccountText" style="color: var(--primary-color); margin-left: 10px;"></span></div>
+                    <div style="margin-bottom: 5px;"><strong style="color: var(--text-main);">TID:</strong> <span id="orderTransactionIdText" style="color: var(--primary-color); font-family: monospace; letter-spacing: 1px; margin-left: 10px;"></span></div>
+                    <div style="margin-bottom: 5px;"><strong style="color: var(--text-main);">Your Name:</strong> <span id="orderReceiptNameText" style="color: var(--primary-color); margin-left: 10px;"></span>
+                        <div id="nameMatchStatus" style="font-size: 0.85rem; margin-top: 2px; margin-left: 10px;"></div>
+                    </div>
+                    <div style="margin-bottom: 5px;"><strong style="color: var(--text-main);">Amount:</strong> <span id="orderAmountText" style="color: var(--primary-color); margin-left: 10px;"></span>
+                        <div id="amountMatchStatus" style="font-size: 0.85rem; margin-top: 2px; margin-left: 10px;"></div>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" id="viewScreenshotBtn" style="margin-top: 5px;" onclick="window.open('', '_blank')">View Screenshot</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Add Product</h3>
+                <button onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editProductId">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="pName" placeholder="e.g. Pure Honey">
+                </div>
+                <div class="form-group">
+                    <label>Price (Rs.)</label>
+                    <input type="number" id="pPrice">
+                </div>
+                <div class="form-group">
+                    <label>Profit (Rs.)</label>
+                    <input type="number" id="pProfit">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="pCategory" placeholder="e.g. Grocery">
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" id="pImage" accept="image/*">
+                </div>
+                <button class="btn btn-primary w-100" style="width: 100%" onclick="saveProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>Add Payment Method</h3>
+                <button class="close-btn" onclick="closePaymentModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Method Name (e.g. JazzCash)</label>
+                    <input type="text" id="payName" placeholder="Method Name" oninput="togglePaymentFields()">
+                </div>
+                <div id="paymentAdditionalFields">
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="text" id="payAccountNumber" placeholder="Account Number">
+                    </div>
+                    <div class="form-group">
+                        <label>Account Holder Name</label>
+                        <input type="text" id="payAccountHolderName" placeholder="Account Holder Name (same as banking app)">
+                    </div>
+                    <div class="form-group">
+                        <label>Other Details (Optional)</label>
+                        <input type="text" id="payDetails" placeholder="Any other details">
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100" style="width: 100%" onclick="savePaymentMethod()">Add Method</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/AdminPanel.js"></script>
+</body>
+</html>
