@@ -34,7 +34,7 @@ function switchTab(tabId, btnElement) {
 // --- DASHBOARD ---
 async function loadDashboard() {
     try {
-        const res = await fetch('http://localhost:5000/api/admin/dashboard-stats', { headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/dashboard-stats', { headers });
         const data = await res.json();
         document.getElementById('statEarnings').innerText = `Rs. ${data.totalEarnings || 0}`;
         document.getElementById('statProfit').innerText = `Rs. ${data.totalProfit || 0}`;
@@ -47,7 +47,7 @@ async function loadDashboard() {
 let allProducts = [];
 async function loadProducts() {
     try {
-        const res = await fetch('http://localhost:5000/api/products');
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/products');
         allProducts = await res.json();
         const tbody = document.getElementById('productsTableBody');
         tbody.innerHTML = '';
@@ -77,7 +77,7 @@ async function loadProducts() {
 async function deleteProduct(id) {
     if(!confirm("Are you sure you want to delete this product?")) return;
     try {
-        const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+        const res = await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/admin/products/${id}`, {
             method: 'DELETE',
             headers
         });
@@ -97,7 +97,7 @@ async function updateCredentials() {
     if (!username && !password) return alert("Please enter a new username or password to update.");
     
     try {
-        const res = await fetch('http://localhost:5000/api/admin/update-credentials', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/update-credentials', {
             method: 'PUT',
             headers,
             body: JSON.stringify({ username, password })
@@ -168,7 +168,7 @@ async function saveProduct() {
         formData.append('image', imageFile);
     }
 
-    const url = id ? `http://localhost:5000/api/admin/products/${id}` : `http://localhost:5000/api/admin/products`;
+    const url = id ? `https://shafeeq-pansaar-store-production.up.railway.app/api/admin/products/${id}` : `https://shafeeq-pansaar-store-production.up.railway.app/api/admin/products`;
     const method = id ? 'PUT' : 'POST';
     const customHeaders = { 'x-auth-token': token };
 
@@ -185,7 +185,7 @@ async function saveProduct() {
 
 async function toggleSoldOut(id, isSoldOut) {
     try {
-        await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+        await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/admin/products/${id}`, {
             method: 'PUT', headers, body: JSON.stringify({ isSoldOut })
         });
     } catch (e) { alert('Error updating status'); loadProducts(); }
@@ -195,7 +195,7 @@ async function toggleSoldOut(id, isSoldOut) {
 let allOrders = [];
 async function loadOrders() {
     try {
-        const res = await fetch('http://localhost:5000/api/admin/orders', { headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/orders', { headers });
         allOrders = await res.json();
         const tbody = document.getElementById('ordersTableBody');
         tbody.innerHTML = '';
@@ -240,7 +240,7 @@ async function viewOrderDetails(orderId) {
     if (order.paymentMethod && order.paymentMethod !== 'Cash on Delivery') {
         if (!currentSettings) {
             try {
-                const res = await fetch('http://localhost:5000/api/admin/settings', { headers });
+                const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', { headers });
                 currentSettings = await res.json();
             } catch(e) { console.error("Error fetching settings for matching", e); }
         }
@@ -303,7 +303,7 @@ function closeOrderDetailsModal() {
 async function markOrderComplete(id) {
     if(!confirm('Mark this order as completed?')) return;
     try {
-        await fetch(`http://localhost:5000/api/admin/orders/${id}/complete`, { method: 'PUT', headers });
+        await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/admin/orders/${id}/complete`, { method: 'PUT', headers });
         loadOrders();
     } catch (e) { alert('Error'); }
 }
@@ -311,7 +311,7 @@ async function markOrderComplete(id) {
 async function deleteOrder(id) {
     if(!confirm('Are you sure you want to delete this order?')) return;
     try {
-        const res = await fetch(`http://localhost:5000/api/admin/orders/${id}`, { method: 'DELETE', headers });
+        const res = await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/admin/orders/${id}`, { method: 'DELETE', headers });
         if(res.ok) {
             loadOrders();
         } else {
@@ -323,7 +323,7 @@ async function deleteOrder(id) {
 async function resetDashboard() {
     if(!confirm('WARNING: This will delete ALL orders and reset earnings to 0. Are you sure you want to proceed?')) return;
     try {
-        const res = await fetch('http://localhost:5000/api/admin/orders/reset', { method: 'DELETE', headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/orders/reset', { method: 'DELETE', headers });
         if (res.ok) {
             alert('Dashboard reset successfully');
             loadDashboard();
@@ -336,7 +336,7 @@ async function resetDashboard() {
 async function resetEarnings() {
     if(!confirm('WARNING: This will delete all Completed/Delivered orders to reset your earnings to 0. Pending orders will be kept safe. Proceed?')) return;
     try {
-        const res = await fetch('http://localhost:5000/api/admin/orders/reset-earnings', { method: 'DELETE', headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/orders/reset-earnings', { method: 'DELETE', headers });
         if (res.ok) {
             alert('Earnings reset successfully');
             loadDashboard();
@@ -350,7 +350,7 @@ async function resetEarnings() {
 // --- FEEDBACK ---
 async function loadFeedback() {
     try {
-        const res = await fetch('http://localhost:5000/api/admin/feedback', { headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/feedback', { headers });
         const feedbacks = await res.json();
         const tbody = document.getElementById('feedbackTableBody');
         tbody.innerHTML = '';
@@ -373,7 +373,7 @@ async function loadFeedback() {
 // --- QUESTIONS ---
 async function loadQuestions() {
     try {
-        const res = await fetch('http://localhost:5000/api/questions', { headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/questions', { headers });
         const questions = await res.json();
         const tbody = document.getElementById('questionsTableBody');
         tbody.innerHTML = '';
@@ -395,7 +395,7 @@ async function loadQuestions() {
 let currentSettings = null;
 async function loadSettings() {
     try {
-        const res = await fetch('http://localhost:5000/api/admin/settings', { headers });
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', { headers });
         const settings = await res.json();
         currentSettings = settings;
         
@@ -433,7 +433,7 @@ async function loadSettings() {
 async function toggleStoreStatus(isOpen) {
     document.getElementById('storeStatusText').innerText = isOpen ? 'Store is Open' : 'Store is Closed';
     try {
-        await fetch('http://localhost:5000/api/admin/settings', {
+        await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', {
             method: 'PUT', headers, body: JSON.stringify({ isStoreOpen: isOpen, isAutoOpenClose: false })
         });
         // Turn off auto schedule on manual override
@@ -447,7 +447,7 @@ async function updateAutoSchedule() {
     const closeTime = document.getElementById('closeTimeInput').value;
 
     try {
-        const res = await fetch('http://localhost:5000/api/admin/settings', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', {
             method: 'PUT', headers, body: JSON.stringify({ isAutoOpenClose, openTime, closeTime })
         });
         // We reload settings to let the backend dynamically sync and send back the correct store state
@@ -458,7 +458,7 @@ async function updateAutoSchedule() {
 async function updatePaymentDetail(idx, newDetail) {
     currentSettings.paymentMethods[idx].details = newDetail;
     try {
-        await fetch('http://localhost:5000/api/admin/settings', {
+        await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', {
             method: 'PUT', headers, body: JSON.stringify({ paymentMethods: currentSettings.paymentMethods })
         });
     } catch (e) { alert('Error'); }
@@ -496,7 +496,7 @@ async function savePaymentMethod() {
 
     currentSettings.paymentMethods.push({ name: name, methodName: name, details, accountNumber, accountHolderName });
     try {
-        const res = await fetch('http://localhost:5000/api/admin/settings', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', {
             method: 'PUT', headers, body: JSON.stringify({ paymentMethods: currentSettings.paymentMethods })
         });
         if (!res.ok) {
@@ -513,7 +513,7 @@ async function deletePaymentMethod(idx) {
     if(!confirm("Are you sure you want to delete this payment method?")) return;
     currentSettings.paymentMethods.splice(idx, 1);
     try {
-        await fetch('http://localhost:5000/api/admin/settings', {
+        await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings', {
             method: 'PUT', headers, body: JSON.stringify({ paymentMethods: currentSettings.paymentMethods })
         });
         loadSettings();
@@ -526,7 +526,7 @@ async function createAdmin() {
     if(!u || !p) return alert('Fill all fields');
     
     try {
-        const res = await fetch('http://localhost:5000/api/admin/create', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/create', {
             method: 'POST', headers, body: JSON.stringify({ username: u, password: p })
         });
         const data = await res.json();

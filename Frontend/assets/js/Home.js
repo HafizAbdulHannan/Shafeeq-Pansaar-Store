@@ -344,7 +344,7 @@ confirmOrderBtn.addEventListener('click', async () => {
     }
     
     try {
-        const res = await fetch('http://localhost:5000/api/orders', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/orders', {
             method: 'POST',
             body: formData
         });
@@ -406,7 +406,7 @@ function updateAddressList() {
 
 async function fetchProducts() {
     try {
-        const res = await fetch('http://localhost:5000/api/products');
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/products');
         products = await res.json();
         renderProducts();
     } catch(e) {
@@ -439,7 +439,7 @@ let storeSettings = null;
 
 async function fetchSettings() {
     try {
-        const res = await fetch('http://localhost:5000/api/admin/settings');
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/settings');
         const settings = await res.json();
         storeSettings = settings;
         
@@ -513,7 +513,7 @@ async function submitFeedback() {
     const text = document.getElementById('feedbackText').value;
     if (!text) return alert('Please enter feedback');
     try {
-        const response = await fetch('http://localhost:5000/api/feedback', {
+        const response = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/feedback', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: user.name, email: user.email, rating: selectedRating, message: text })
@@ -536,7 +536,7 @@ async function openMyOrdersModal() {
     list.innerHTML = '<p>Loading your orders...</p>';
     
     try {
-        const res = await fetch(`http://localhost:5000/api/orders/user/${user.id}`);
+        const res = await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/orders/user/${user.id}`);
         const orders = await res.json();
         
         if(orders.length === 0) {
@@ -580,7 +580,7 @@ async function openMyOrdersModal() {
 async function deleteUserOrder(id) {
     if(!confirm('Are you sure you want to delete this order?')) return;
     try {
-        const res = await fetch(`http://localhost:5000/api/orders/${id}`, { method: 'DELETE' });
+        const res = await fetch(`https://shafeeq-pansaar-store-production.up.railway.app/api/orders/${id}`, { method: 'DELETE' });
         if (res.ok) {
             openMyOrdersModal();
         } else {

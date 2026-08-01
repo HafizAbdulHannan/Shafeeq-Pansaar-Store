@@ -19,7 +19,7 @@ themeToggle.addEventListener('click', () => {
 
 async function loadStats() {
     try {
-        const response = await fetch('http://localhost:5000/api/feedback/stats');
+        const response = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/feedback/stats');
         if (response.ok) {
             const data = await response.json();
             document.getElementById('statsUsers').textContent = data.users;
@@ -65,7 +65,7 @@ async function submitQuestion() {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/api/questions', {
+        const response = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/questions', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, question })

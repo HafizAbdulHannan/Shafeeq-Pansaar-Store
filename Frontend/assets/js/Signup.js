@@ -108,7 +108,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('http://localhost:5000/api/auth/register', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, dob, age, phone, defaultAddress })

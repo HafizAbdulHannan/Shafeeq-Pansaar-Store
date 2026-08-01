@@ -42,7 +42,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
     const pass = document.getElementById('password').value;
 
     try {
-        const res = await fetch('http://localhost:5000/api/admin/login', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password: pass })
@@ -84,7 +84,7 @@ async function submitForgotPassword() {
     }
 
     try {
-        const res = await fetch('http://localhost:5000/api/admin/forgot-password', {
+        const res = await fetch('https://shafeeq-pansaar-store-production.up.railway.app/api/admin/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, secretKey, newPassword })
